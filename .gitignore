@@ -1,14 +1,25 @@
-# Data
+# Data mappen en bestanden
 data/
+!data/raw/.gitkeep
+!data/.gitkeep
 
-# PostgreSQL
-*.db
+# DuckDB database
+*.duckdb
 
-# OS / editor
+# Grote bestanden algemeen
+*.csv
+*.parquet
+*.zip
+
+# Python cache en virtual env
+__pycache__/
+.venv/
+venv/
+env/
+
+# VS Code settings (optioneel, als je die privé wilt houden)
 .vscode/
+
+# OS files
 .DS_Store
-
-# Logs
-*.log
-
-
+Thumbs.db
