@@ -1,4 +1,4 @@
-# RDW PostgreSQL Data Platform
+# RDW Data Platform
 
 Een eenvoudig data-engineering project op Linux om te begrijpen hoe datapijplijnen in de praktijk werken.
 
@@ -8,7 +8,11 @@ In dit project wordt gebruikgemaakt van openbare RDW-data. Het doel is het opzet
 
 ## 🚀 Tech stack
 - Linux (Ubuntu via WSL2)
+<<<<<<< HEAD
 - DuckDB
+=======
+- PostgreSQL Of DuckDB (ik weet het nog niet)
+>>>>>>> origin/main
 - Bash
 - SQL
 - Git
