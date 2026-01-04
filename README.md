@@ -8,7 +8,7 @@ In dit project wordt gebruikgemaakt van openbare RDW-data. Het doel is het opzet
 
 ## 🚀 Tech stack
 - Linux (Ubuntu via WSL2)
-- PostgreSQL
+- DuckDB
 - Bash
 - SQL
 - Git

@@ -1,0 +1,47 @@
+import requests
+import psycopg2
+from datetime import datetime
+
+RDW_API = "https://opendata.rdw.nl/api/v3/views/m9d7-ebf2/query.json"
+SOURCE = "RDW_API"
+
+conn = psycopg2.connect(
+    dbname="rdw",
+    user="postgres",
+    host="localhost"
+)
+cur = conn.cursor()
+
+response = requests.get(RDW_API, params={"$limit": 1000})
+data = response.json()
+
+for record in data:
+    cur.execute("""
+        INSERT INTO bronze.voertuigen (
+            kenteken,
+            merk,
+            handelsbenaming,
+            voertuigsoort,
+            datum_eerste_toelating,
+            source
+        )
+        VALUES (%s, %s, %s, %s, %s, %s)
+        ON CONFLICT (kenteken) DO UPDATE
+        SET
+            merk = EXCLUDED.merk,
+            handelsbenaming = EXCLUDED.handelsbenaming,
+            voertuigsoort = EXCLUDED.voertuigsoort,
+            datum_eerste_toelating = EXCLUDED.datum_eerste_toelating,
+            ingest_ts = CURRENT_TIMESTAMP;
+    """, (
+        record.get("kenteken"),
+        record.get("merk"),
+        record.get("handelsbenaming"),
+        record.get("voertuigsoort"),
+        record.get("datum_eerste_toelating"),
+        SOURCE
+    ))
+
+conn.commit()
+cur.close()
+conn.close()
