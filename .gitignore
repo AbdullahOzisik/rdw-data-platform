@@ -1,0 +1,14 @@
+# Data
+data/
+
+# PostgreSQL
+*.db
+
+# OS / editor
+.vscode/
+.DS_Store
+
+# Logs
+*.log
+
+
